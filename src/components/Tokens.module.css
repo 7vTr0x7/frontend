@@ -1,0 +1,39 @@
+/* Stock.module.css */
+
+.stock-exchange-container {
+    background-color: #1F242E;
+    padding: 20px;
+    border-radius: 5px;
+    border-color: #dddddd;
+  }
+  
+.stock-exchange-title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+.stock-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+  }
+  
+.stock-item {
+    background-color: #1F242E;
+    border: 1px solid #dddddd;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .ticker {
+    font-weight: bold;
+    font-size: 18px;
+  }
+  
+  .price {
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  

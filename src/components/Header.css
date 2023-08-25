@@ -1,0 +1,92 @@
+/* Reset some default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Header container */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding: 10px 20px;
+  color: #333;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Logo */
+.logo {
+  width: 80px;
+  height: auto;
+}
+
+/* Navigation links */
+.link {
+  text-decoration: none;
+  color: #333;
+  position: relative; /* Add this for positioning of pseudo-element */
+  transition: color 0.3s ease-in-out;
+}
+
+.link:hover {
+  color: #92B085;
+}
+
+.link::before {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #83A680;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.link:hover::before {
+  transform: scaleX(1);
+}
+
+.headerItem {
+  margin: 0 10px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.headerItem:hover {
+  background-color: #f0f0f0;
+}
+
+/* Connect button */
+.connectButton {
+  padding: 8px 15px;
+  background-color: #9CB788;
+  color: white;
+  border: none;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.connectButton:hover {
+  background-color: #92B085;
+  color: white;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .rightH {
+    margin-top: 10px;
+  }
+}

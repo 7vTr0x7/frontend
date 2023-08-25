@@ -1,0 +1,181 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border: 1px solid #92B085;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  margin-top: 50px;
+  background-color: white;
+  padding-left: 30px;
+  padding-right: 30px;
+  width: 400px;
+}
+
+.buyShareSection {
+  margin-bottom: 20px;
+}
+
+.userSharesSection {
+  width: 100%;
+}
+
+
+.heading {
+  display: flex;
+  justify-content: center;
+  color: #333;
+  align-items: center;
+  margin-bottom: 5px;
+  width: 98%;
+}
+
+.inputGroup {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.container input[type="text"],
+.container select , .container input[type="number"]{
+  padding: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #fff;
+  color: #000;
+  
+}
+
+
+/* Replace with your desired class name or use "selector" */
+.selector {
+  width: 100%;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+/* Replace with your desired class name or use "token-select" */
+.selector select {
+  padding: 12px; /* Slightly larger padding */
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #f7f7f7; /* Light gray background */
+  color: #21273a; /* Darker text color */
+  border: 1px solid #ccc; /* Light gray border */
+  border-radius: 5px;
+  appearance: none; /* Remove default arrow */
+  outline: none; /* Remove focus outline */
+  cursor: pointer; /* Show pointer cursor on hover */
+  font-size: 16px;
+}
+
+/* Style the custom arrow */
+/* Replace with your desired class name or use "selector" */
+.selector::after {
+  content: "\f078"; /* Unicode arrow-down icon (check for Uniswap's actual arrow icon) */
+  font-family: "Font Awesome 5 Free"; /* Use Font Awesome or another icon library */
+  font-weight: 900;
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  pointer-events: none; /* Allow clicking the select field behind the icon */
+}
+
+/* Style the options dropdown */
+/* Replace with your desired class name or use "token-select" */
+.selector select option {
+  padding: 8px;
+}
+
+/* Style the disabled state */
+/* Replace with your desired class name or use "token-select" */
+.selector select:disabled {
+  background-color: #e0e0e0; /* Light gray background for disabled state */
+  color: #a0a0a0; /* Lighter text color for disabled state */
+  cursor: not-allowed; /* Show "not-allowed" cursor on hover */
+}
+
+/* Style the input field on focus */
+/* Replace with your desired class name or use "selector" */
+.selector select:focus {
+  border-color: #5981F3; /* Light blue border on focus */
+  box-shadow: 0 0 3px #5981F3; /* Light blue shadow on focus */
+}
+
+
+/* Replace with your desired class name or use "buyAmount" */
+.sellAmount {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.sellAmount input {
+  padding: 12px; /* Slightly larger padding */
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #f7f7f7; /* Light gray background */
+  color: #21273a; /* Darker text color */
+  border: 1px solid #ccc; /* Light gray border */
+  border-radius: 5px;
+  appearance: none; /* Remove default arrow */
+  outline: none; /* Remove focus outline */
+  cursor: text; /* Show text cursor */
+  font-size: 16px;
+}
+
+/* Style the input field on focus */
+.sellAmount input:focus {
+  border-color: #5981F3; /* Light blue border on focus */
+  box-shadow: 0 0 3px #5981F3; /* Light blue shadow on focus */
+}
+
+/* Style the placeholder text */
+.sellAmount input::placeholder {
+  color: #a0a0a0; /* Lighter text color for placeholder */
+}
+
+/* Style the custom arrow */
+.sellAmount input::after {
+  content: "\f078"; /* Unicode arrow-down icon (check for Uniswap's actual arrow icon) */
+  font-family: "Font Awesome 5 Free"; /* Use Font Awesome or another icon library */
+  font-weight: 900;
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  pointer-events: none; /* Allow clicking the input field behind the icon */
+}
+
+
+.sellButton , button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #92B085;
+    width: 100%;
+  height: 55px;
+  font-size: 20px;
+  border-radius: 12px;
+  color: #fff; /* White text color */
+  font-weight: bold;
+  transition: 0.3s;
+  cursor: pointer;
+  border: none; /* Remove default button border */
+  outline: none; /* Remove button outline */
+}
+
+
+.sellButton[disabled] {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.sellButton[disabled]:hover {
+  cursor: not-allowed;
+  background-color: #92B085;}
+
+.sellButton:hover {
+  background-color: #92B085;
+}

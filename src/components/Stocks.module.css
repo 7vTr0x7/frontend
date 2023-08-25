@@ -1,0 +1,40 @@
+/* Stock.module.css */
+
+.stock_exchange_container {
+  
+  background-color: #1F242E;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.stock_exchange_title {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.stock_list {
+  display: flex;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+}
+
+.stock_item {
+  background-color: #1F242E;
+  border: 1px solid #dddddd;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  flex: 1; /* Allow items to grow and take equal space */
+  min-width: 200px; /* Set a minimum width for the items */
+}
+
+.ticker {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.price {
+  font-size: 16px;
+  margin-top: 10px;
+}

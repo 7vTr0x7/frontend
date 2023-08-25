@@ -1,0 +1,27 @@
+/* custom-toast-styles.css */
+/* Override the default container style */
+.Toastify__toast-container {
+    width: 300px;
+    z-index: 9999;
+    top: 20px;
+  }
+  
+  /* Override the default toast style */
+  .Toastify__toast {
+    background-color: #ffffff;
+    color: #333333;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 12px;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  }
+  .Toastify__toast--success {
+    background-color: #42ba96;
+    color: #ffffff;
+  }
+  .Toastify__toast--error {
+    background-color: #e74c3c;
+    color: #ffffff;
+  }
+  

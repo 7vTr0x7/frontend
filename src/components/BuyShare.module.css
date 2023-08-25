@@ -1,0 +1,233 @@
+/* BuyShares.module.css */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border: 1px solid  #9CB788;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  margin-top: 30px;
+  background-color:  white; /* Dark gray background */
+  width: 400px;
+}
+
+/* Replace with your desired class name or use "buyAmount" */
+.buyAmount {
+  width: 100%;
+  margin-bottom: 10px;
+
+}
+
+.buyAmount input {
+  padding: 12px; /* Slightly larger padding */
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #f7f7f7; /* Light gray background */
+  color: #21273a; /* Darker text color */
+  border: 1px solid #ccc; /* Light gray border */
+  border-radius: 5px;
+  appearance: none; /* Remove default arrow */
+  outline: none; /* Remove focus outline */
+  cursor: text; /* Show text cursor */
+  font-size: 16px;
+}
+
+/* Style the input field on focus */
+.buyAmount input:focus {
+  border-color: #5981F3; /* Light blue border on focus */
+  box-shadow: 0 0 3px #5981F3; /* Light blue shadow on focus */
+}
+
+/* Style the placeholder text */
+.buyAmount input::placeholder {
+  color: #a0a0a0; /* Lighter text color for placeholder */
+}
+
+/* Style the custom arrow */
+.buyAmount input::after {
+  content: "\f078"; /* Unicode arrow-down icon (check for Uniswap's actual arrow icon) */
+  font-family: "Font Awesome 5 Free"; /* Use Font Awesome or another icon library */
+  font-weight: 900;
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  pointer-events: none; /* Allow clicking the input field behind the icon */
+}
+
+
+.buyShareSection {
+  margin-bottom: 20px;
+}
+
+
+
+
+
+.heading {
+  width: 100%;
+  color: #333; /* White text color */
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+.table_heading {
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 40px;
+}
+
+
+.buy-shares-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputGroup {
+  margin-bottom: 10px;
+}
+/* Replace with your desired class name or use "selector" */
+.selector {
+  width: 100%;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+/* Replace with your desired class name or use "token-select" */
+.selector select {
+  padding: 12px; /* Slightly larger padding */
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #f7f7f7; /* Light gray background */
+  color: #21273a; /* Darker text color */
+  border: 1px solid #ccc; /* Light gray border */
+  border-radius: 5px;
+  appearance: none; /* Remove default arrow */
+  outline: none; /* Remove focus outline */
+  cursor: pointer; /* Show pointer cursor on hover */
+  font-size: 16px;
+}
+
+/* Style the custom arrow */
+/* Replace with your desired class name or use "selector" */
+.selector::after {
+  content: "\f078"; /* Unicode arrow-down icon (check for Uniswap's actual arrow icon) */
+  font-family: "Font Awesome 5 Free"; /* Use Font Awesome or another icon library */
+  font-weight: 900;
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  pointer-events: none; /* Allow clicking the select field behind the icon */
+}
+
+/* Style the options dropdown */
+/* Replace with your desired class name or use "token-select" */
+.selector select option {
+  padding: 8px;
+}
+
+/* Style the disabled state */
+/* Replace with your desired class name or use "token-select" */
+.selector select:disabled {
+  background-color: #e0e0e0; /* Light gray background for disabled state */
+  color: #a0a0a0; /* Lighter text color for disabled state */
+  cursor: not-allowed; /* Show "not-allowed" cursor on hover */
+}
+
+/* Style the input field on focus */
+/* Replace with your desired class name or use "selector" */
+.selector select:focus {
+  border-color: #5981F3; /* Light blue border on focus */
+  box-shadow: 0 0 3px #5981F3; /* Light blue shadow on focus */
+}
+
+.sellAmount{
+  padding: 12px; /* Slightly larger padding */
+  flex: 1;
+  box-sizing: border-box;
+  background-color: #f7f7f7; /* Light gray background */
+  color: #21273a; /* Darker text color */
+  border: 1px solid #ccc; /* Light gray border */
+  border-radius: 5px;
+  margin-bottom: 10px;
+  outline: none; /* Remove focus outline */
+
+}
+
+.buyButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #92B085; /* Light blue background */
+  width: 100%;
+  height: 55px;
+  font-size: 20px;
+  border-radius: 12px;
+  color: #fff; /* White text color */
+  font-weight: bold;
+  transition: 0.3s;
+  cursor: pointer;
+  border: none; /* Remove default button border */
+  outline: none; /* Remove button outline */
+}
+
+.buyButton[disabled] {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.buyButton:hover {
+  background-color: #92B085;/* Darker blue on hover */
+}
+
+.user-shares {
+  margin-top: 20px;
+  width: 80%;
+}
+
+.shares-table {
+  width: 95%;
+  border-collapse: collapse;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.shares-table th,
+.shares-table td {
+  padding: 12px;
+  border: 1px solid #ccc;
+}
+
+.shares-table th {
+  background-color: #92B085; /* Light blue header background */
+  color: #fff; /* White text color */
+  font-weight: bold;
+}
+
+
+
+/* Optional: Adjust the font size and other styles for the table content */
+.shares-table td {
+  font-size: 16px;
+   /* Darker text color */
+}
+
+/* Optional: Center align the content in the table cells */
+.shares-table th,
+.shares-table td {
+  text-align: center;
+}
+
+/* Optional: Add some spacing between the table and the heading */
+.user-shares h2 {
+  margin-bottom: 10px;
+}
+
+/* Optional: Add a scrollbar for the table if it overflows the container */
+.user-shares {
+  overflow-y: auto;
+}

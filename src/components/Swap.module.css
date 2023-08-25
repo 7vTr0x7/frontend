@@ -1,0 +1,103 @@
+/* Swap.module.css */
+
+.swap-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border: 1px solid #9CB788;;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  margin-top: 50px;
+  background-color: white; /* Light gray background */
+  width: 400px;
+}
+
+.swap-heading {
+  width: 100%;
+  color: #333; /* Darker text color */
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.swap-input-group {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.select,
+.inputGroup {
+  padding: 12px; /* Slightly larger padding */
+  flex: 1;
+  box-sizing: border-box;
+  background-color: #f7f7f7; /* Light gray background */
+  color: #21273a; /* Darker text color */
+  border: 1px solid #ccc; /* Light gray border */
+  border-radius: 5px;
+  margin-right: 10px;
+  appearance: none; /* Remove default arrow */
+  outline: none; /* Remove focus outline */
+  cursor: pointer; /* Show pointer cursor on hover */
+}
+
+/* Style the custom arrow */
+.select::after {
+  content: "\f078"; /* Unicode arrow-down icon (check for Uniswap's actual arrow icon) */
+  font-family: "Font Awesome 5 Free"; /* Use Font Awesome or another icon library */
+  font-weight: 900;
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  pointer-events: none; /* Allow clicking the select behind the icon */
+}
+
+/* Style the options dropdown */
+.select option {
+  padding: 8px;
+}
+
+.swap-label {
+  margin-bottom: 5px;
+  color: #21273a; /* Darker text color */
+}
+
+.swap-output-group {
+  width: 100%;
+  color: #333; /* Darker text color */
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.swap-button-group {
+  width: 100%;
+}
+
+.swap-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color:  #9CB788; /* Light blue background */
+  width: 100%;
+  height: 55px;
+  font-size: 20px;
+  border-radius: 12px;
+  color: #fff; /* White text color */
+  font-weight: bold;
+  transition: 0.3s;
+  cursor: pointer;
+  border: none; /* Remove default button border */
+  outline: none; /* Remove button outline */
+}
+
+.swap-button[disabled] {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.swap-button:hover {
+  background-color: #9CB788; /* Darker blue on hover */
+}
