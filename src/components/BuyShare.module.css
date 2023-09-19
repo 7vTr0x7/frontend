@@ -11,7 +11,8 @@
   margin-bottom: 20px;
   margin-top: 30px;
   background-color:  white; /* Dark gray background */
-  width: 400px;
+  width: 100%; /* Make container full width by default */
+  max-width: 400px;
 }
 
 /* Replace with your desired class name or use "buyAmount" */
@@ -64,7 +65,12 @@
 }
 
 
-
+.quantity{
+  margin-bottom: 5px;
+  margin-top: 10px;
+  font-weight: bold;
+  color: black;
+}
 
 
 .heading {
@@ -145,12 +151,12 @@
   box-shadow: 0 0 3px #5981F3; /* Light blue shadow on focus */
 }
 
-.sellAmount{
+.buyAmt{
   padding: 12px; /* Slightly larger padding */
   flex: 1;
   box-sizing: border-box;
   background-color: #f7f7f7; /* Light gray background */
-  color: #21273a; /* Darker text color */
+  color: black; /* Darker text color */
   border: 1px solid #ccc; /* Light gray border */
   border-radius: 5px;
   margin-bottom: 10px;
@@ -231,3 +237,34 @@
 .user-shares {
   overflow-y: auto;
 }
+
+
+.price input {
+  margin-bottom: 10px;
+  padding: 12px; /* Slightly larger padding */
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #f7f7f7; /* Light gray background */
+  color: grey; /* Darker text color */
+  border: 1px solid #ccc; /* Light gray border */
+  border-radius: 5px;
+  appearance: none; /* Remove default arrow */
+  outline: none; /* Remove focus outline */
+  cursor: text; /* Show text cursor */
+  font-size: 16px;
+}
+
+
+
+
+/* Adjust styles for screens with a maximum width of 480px */
+@media (max-width: 668px) {
+  .container {
+    padding: 10px; /* Reduce padding for smaller screens */
+  }
+
+  .buyAmount input {
+    font-size: 14px; /* Reduce font size for smaller screens */
+  }
+}
+

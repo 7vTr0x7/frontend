@@ -1,7 +1,16 @@
-/* styles.css */
+/* Default styles */
+
 .user-shares {
   font-family: Arial, sans-serif;
   margin: 20px;
+  margin-top: 5rem;
+}
+
+.text {
+  color: black;
+  font-weight: bold;
+  justify-content: center;
+  align-items: center;
 }
 
 .table_heading {
@@ -12,7 +21,7 @@
 .shares-table {
   width: 100%;
   border-collapse: collapse;
-  border: 1px solid   #92B085;
+  border: 1px solid #92B085;
 }
 
 .shares-table th,
@@ -27,23 +36,42 @@
 
 .shares-table tr:nth-child(even) {
   background-color: white;
-  color:  #333;
+  color: #333;
 }
+
 .shares-table tr {
   background-color: white;
-  color:  #333;
+  color: #333;
 }
 
 .shares-table tr:hover {
   background-color: white;
-  color:  #333;
-
+  color: #333;
 }
 
 .profit-positive {
-  color:  #333;
+  color: #333;
 }
 
 .profit-negative {
   color: red;
+}
+
+/* Responsive adjustments */
+
+/* Adjust styles for screens with a maximum width of 768px */
+@media (max-width: 370px) {
+  .user-shares {
+    margin-top: 4rem;; /* Reduce margin for smaller screens */
+  }
+
+  .table_heading {
+    font-size: 20px; /* Reduce font size for smaller screens */
+  }
+
+  .shares-table th,
+  .shares-table td {
+    padding: 3px; /* Reduce padding for smaller screens */
+    font-size: 14px; /* Reduce font size for smaller screens */
+  }
 }

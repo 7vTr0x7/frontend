@@ -7,7 +7,7 @@ import openLogo from "../OpenAppBull.png"
 
 function Header(props) {
 
-  const {currentAccount, isConnected, connectToEthereum} = props;
+  const {currentAccount, isConnected, connectToEthereum ,disconnectFromEthereum} = props;
 
   return (
     <header>
@@ -34,8 +34,12 @@ function Header(props) {
           <img src={Eth} alt="eth" className="eth" />
           Ethereum
         </div> */}
-        <div className="connectButton" onClick={connectToEthereum}>
-          {isConnected ? (currentAccount.slice(0,4) +"..." +currentAccount.slice(38)) : "Connect"}
+        <div>
+          {isConnected ? (
+            <button className="disConnectButton" onClick={disconnectFromEthereum} > Disconnect </button>
+          ) : (
+            <button className="connectButton" onClick={connectToEthereum}> Connect </button>
+          ) }
         </div>
       </div>
     </header>

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const apiKey = 'pk_c483283f3f9d48d5b8bf7eee96072cb7'; // Replace with your IEX Cloud API key
+const apiKey = 'pk_9845585e2bf84f9eacb064d65c02f659'; // Replace with your IEX Cloud API key
 const tickers = ['AMZN', 'AAPL', 'TSLA', 'GOOGL', 'MSFT'];
 
 export const useSharePrices = () => {
@@ -12,13 +12,13 @@ export const useSharePrices = () => {
       const sharePrices = await fetchSharePrices();
       if (sharePrices) {
         setSharesData(sharePrices);
-        console.log('Fetched share prices:', sharePrices);
+        // console.log('Fetched share prices:', sharePrices);
       }
     };
 
     fetchData();
 
-    const updateInterval = setInterval(fetchData, 60000); // Update every 1 minute
+    const updateInterval = setInterval(fetchData, 3000); // Update every 1 minute
 
     // Clean up the interval when the component is unmounted
     return () => clearInterval(updateInterval);

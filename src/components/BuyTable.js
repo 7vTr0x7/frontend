@@ -26,7 +26,7 @@ const BuyTable = (props) => {
       }
     };
 
-   
+
 
     getUserShares();
 
@@ -62,40 +62,51 @@ const BuyTable = (props) => {
 
   return (
     <div className={styles['user-shares']}>
-      <h2 className={styles.table_heading}>Account</h2>
-      <table className={styles['shares-table']}>
-        <thead>
-          <tr>
-            <th>ShareName</th>
-            <th>BuyAmount</th>
-            <th>CurrentPrice</th>
-            <th>Quantity</th>
-            <th>P/L</th>
-            <th>Invested</th>
-          </tr>
-        </thead>
-        <tbody>
-          {userShares.map((share, index) => (
-            <tr key={index}>
-              <td>{getTokenName(share.tokenAddress)}</td>
-              <td>
-                {((getTokenPrice(getTokenName(share.tokenAddress))) * (share.buyAmount.toString() / 100) / (share.buyPrice.toString() / 100)).toFixed(2)}
-              </td>
-              <td>{(getTokenPrice(getTokenName(share.tokenAddress))).toFixed(2)}</td>
-              <td>{(ethers.utils.formatEther(share.tokenAmt))}</td>
-              <td className={(((getTokenPrice(getTokenName(share.tokenAddress))) * (share.buyAmount.toString() / 100) / (share.buyPrice.toString() / 100) - (share.buyAmount.toString() / 100)).toFixed(2) >= 0 ? styles['profit-positive'] : styles['profit-negative'])}>
-                {((getTokenPrice(getTokenName(share.tokenAddress))) * (share.buyAmount.toString() / 100) / (share.buyPrice.toString() / 100) - (share.buyAmount.toString() / 100)).toFixed(5)}{' '}
-                {(((getTokenPrice(getTokenName(share.tokenAddress))) * (share.buyAmount.toString() / 100) / (share.buyPrice.toString() / 100) - (share.buyAmount.toString() / 100)).toFixed(2) >= 0 ?'▲':'▼' )}
-                {(((getTokenPrice(getTokenName(share.tokenAddress))) * (share.buyAmount.toString() / 100) / (share.buyPrice.toString() / 100) - (share.buyAmount.toString() / 100)) / (share.buyAmount.toString() / 100) * 100).toFixed(2)}%
-              </td>
-              <td>
-                {(((getTokenPrice(getTokenName(share.tokenAddress))) * (share.buyAmount.toString() / 100) / (share.buyPrice.toString() / 100))
-                  * exchangeRate).toFixed(3)}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      {(
+        userShares.length > 0 ?
+          <table className={styles['shares-table']}>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>USD</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>P/L</th>
+                <th>Matic</th>
+              </tr>
+            </thead>
+            <tbody>
+              {userShares.map((share, index) => (
+                <tr key={index}>
+                  <td>{getTokenName(share.tokenAddress)}</td>
+                  <td>
+                    {Math.floor(((getTokenPrice(getTokenName(share.tokenAddress))) * (share.buyAmount.toString() / 100) / (share.buyPrice.toString() / 100)) * 100) / 100}
+                  </td>
+                  <td>{(getTokenPrice(getTokenName(share.tokenAddress))).toFixed(2)}</td>
+                  <td>{Number((ethers.utils.formatEther(share.tokenAmt))).toFixed(5)}</td>
+                  <td className={(Math.floor(
+                    ((getTokenPrice(getTokenName(share.tokenAddress)) *
+                      (share.buyAmount.toString() / 100) /
+                      (share.buyPrice.toString() / 100)) -
+                      (share.buyAmount.toString() / 100)) *
+                    100
+                  ) / 100) >= 0 ? styles['profit-positive'] : styles['profit-negative']}>
+                    {Math.floor((((getTokenPrice(getTokenName(share.tokenAddress))) * (share.buyAmount.toString() / 100) / (share.buyPrice.toString() / 100)) - (share.buyAmount.toString() / 100)) * 100) / 100}{' '}
+                    
+                    {(((getTokenPrice(getTokenName(share.tokenAddress))) * (share.buyAmount.toString() / 100) / (share.buyPrice.toString() / 100) - (share.buyAmount.toString() / 100)).toFixed(2) >= 0 ? '▲' : '▼')}
+                    {(((getTokenPrice(getTokenName(share.tokenAddress))) * (share.buyAmount.toString() / 100) / (share.buyPrice.toString() / 100) - (share.buyAmount.toString() / 100)) / (share.buyAmount.toString() / 100) * 100).toFixed(2)}%
+                  </td>
+                  <td>
+                    {Math.floor((((getTokenPrice(getTokenName(share.tokenAddress))) * (share.buyAmount.toString() / 100) / (share.buyPrice.toString() / 100)) * exchangeRate) * 1000) / 1000}
+                  </td>
+
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          : <p className={styles['text']}>Dont Have Any Holdings</p>
+      )}
+
     </div>
   );
 };

@@ -20,6 +20,7 @@ header {
 .logo {
   width: 80px;
   height: auto;
+  margin-bottom: 10px; /* Add space below the logo for smaller screens */
 }
 
 /* Navigation links */
@@ -64,9 +65,13 @@ header {
 }
 
 /* Connect button */
-.connectButton {
-  padding: 8px 15px;
+.connectButton,
+.disConnectButton {
+  padding: 3px 15px;
+  height: 40px;
+  position: relative;
   background-color: #9CB788;
+  font-size: 20px;
   color: white;
   border: none;
   border-radius: 2rem;
@@ -74,19 +79,42 @@ header {
   transition: background-color 0.3s ease-in-out;
 }
 
-.connectButton:hover {
+.disConnectButton {
+  font-size: 18px;
+}
+
+.connectButton:hover,
+.disConnectButton:hover {
   background-color: #92B085;
   color: white;
 }
 
-/* Responsive adjustments */
-@media screen and (max-width: 768px) {
+/* Media queries for responsive design */
+@media screen and (max-width: 900px) {
   header {
     flex-direction: column;
     text-align: center;
+    padding: 10px; /* Increase padding for better spacing */
+  }
+
+  .logo {
+    width: 60px; /* Adjust logo size for smaller screens */
+    margin-bottom: 10px; /* Add space below the logo for smaller screens */
   }
 
   .rightH {
     margin-top: 10px;
   }
+
+  .headerItem {
+    margin: 5px; /* Adjust margin for smaller screens */
+  }
+
+  .connectButton,
+  .disConnectButton {
+    padding: 3px 10px; /* Adjust padding for smaller screens */
+    font-size: 16px; /* Adjust font size for smaller screens */
+  }
 }
+
+

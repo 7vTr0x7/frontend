@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -24,8 +24,8 @@ import {
 function Swap(props) {
   //states from open investment
 
- 
-  const { OpenContract,contractaddress,contract,currentAccount ,provider, signer } = props;
+
+  const { OpenContract, contractaddress, contract, currentAccount, provider, signer } = props;
 
   const exchangeRate = useExchangeRate();
 
@@ -82,7 +82,7 @@ function Swap(props) {
   useEffect(() => {
     getUserShares()
   })
-  
+
 
   // Fetch token reserves and total supply
   useEffect(() => {
@@ -169,23 +169,27 @@ function Swap(props) {
       console.log(token1P.toString())
       console.log(token2P.toString())
 
-      const unit2 = ethers.utils.parseUnits((amountIn * 100).toFixed(0), 0); // Convert to BigNumber with 0 decimal places
-  
-      const amtIn = unit2.toString();
+      const amt = ethers.utils.parseUnits((amountIn * 100).toFixed(0), 0); // Convert to BigNumber with 0 decimal places
+
+      const amtIn = amt.toString();
 
       console.log(amtIn.toString());
 
       let buyPrice;
 
-      for(let i = 0;i < userShares.length; i ++){
-       {userShares.map((share) => (
-           (share.tokenAddress == tokenInAddress ? buyPrice = share.buyPrice : buyPrice = 0 )
-       ))}
+      for (let i = 0; i < userShares.length; i++) {
+        {
+          userShares.map((share) => (
+            (share.tokenAddress == tokenInAddress ? buyPrice = share.buyPrice : buyPrice = share.buyPrice)
+          ))
+        }
       }
 
       console.log(buyPrice.toString() / 100)
 
-      let tokenAmtIn = await OpenContract.get(amtIn,buyPrice);
+      let tokenAmtIn = await OpenContract.get(amtIn, buyPrice);
+
+
 
 
       const token1Contract = new ethers.Contract(
@@ -195,23 +199,31 @@ function Swap(props) {
       );
 
 
-      
+
       const rate = exchangeRate;
       const decimals = 18; // Adjust the number of decimals based on your requirements
       const weiRate = ethers.utils.parseUnits(rate, decimals);
       console.log(weiRate.toString());
 
-  
-      
+
+
 
       const appro1 = await token1Contract.approve(contractaddress, tokenAmtIn);
+
+      toast.info(`waiting for approval to be complete`, {
+        position: toast.POSITION.TOP_CENTER
+      });
+
+
       await appro1.wait();
       console.log(`${getTokenName(tokens[token1Name])} approved`);
+
       toast.success(`${getTokenName(tokens[token1Name])} approved`, {
         position: toast.POSITION.TOP_CENTER
       });
 
-      const swap = await contract.swap(
+      
+      const estimatedGas = await contract.estimateGas.swap(
         token1Address,
         amtIn,
         token2Address,
@@ -220,6 +232,27 @@ function Swap(props) {
         weiRate,
         selectedFee
       );
+
+      console.log(`Estimated gas cost: ${estimatedGas}`);
+
+      const swap = await contract.connect(signer)
+      .swap(
+        token1Address,
+        amtIn,
+        token2Address,
+        token1P,
+        token2P,
+        weiRate,
+        selectedFee,
+        {
+          gasLimit: estimatedGas // Set the gas limit to the estimated gas cost
+        }
+      );
+
+      toast.info(`waiting for tx to be complete`, {
+        position: toast.POSITION.TOP_CENTER
+      });
+
 
       await swap.wait();
       console.log("swaped successfully");
@@ -236,32 +269,6 @@ function Swap(props) {
 
     }
   };
-
-
-  // const init = useCallback( async () => {
-  //   if (amountIn > 0){
-
-  //     const tokenIn = tokens[token1Name];
-  //     const amtIn =  ethers.utils.parseUnits((amountIn * 100).toFixed(0), 0); // Convert to BigNumber with 0 decimal places
- 
-  //     let tokenAmtIn;
- 
-  //     let amountOut;
- 
-  //     [tokenAmtIn, amountOut] = await contract.get(tokenIn, amtIn);
-
-  //     const amtOut = amountOut / 100;
-      
-  //          setAmountOut(amtOut.toString());
-
- 
-  //    }
-   
-  // }, [amountIn,amountOut]);
-
-  // useEffect(() => {
-  //   init();
-  // }, [init]);
 
 
 
@@ -353,13 +360,13 @@ function Swap(props) {
       MSFT: getSharePrice('MSFT'),
       AAPL: getSharePrice("AAPL"),
     };
-  
+
     // Get the token price, or set it to 0 if the value is not a valid number
     const price = parseFloat(tokenPrice[name]) || 0;
-  
+
     return price;
   };
-  
+
 
   return (
     <div className={styles["swap-container"]}>
@@ -381,7 +388,7 @@ function Swap(props) {
           id="token-in"
           value={token1Name}
           onChange={handleTokenInChange}
-          data-tooltip-id="tooltip" data-tooltip-content="select share"
+          data-tooltip-id="tooltip" data-tooltip-content="Share Selection :"
 
         >
           <option value="">Select</option>
@@ -399,8 +406,8 @@ function Swap(props) {
           type="number"
           id="amount-out"
           placeholder="Amount OUT"
-          value={( (amountIn * (10000 - selectedFee)) / 10000 == 0 ? "Amount OUT" : (amountIn * (10000 - selectedFee)) / 10000 )}
-          data-tooltip-id="tooltip" data-tooltip-content={ ` charging 2.00% swap fees ` }
+          value={((amountIn * (10000 - selectedFee)) / 10000 == 0 ? "Amount OUT" : (amountIn * (10000 - selectedFee)) / 10000)}
+          data-tooltip-id="tooltip" data-tooltip-content={` charging 2.00% swap fees `}
 
         />
         <select
@@ -408,7 +415,7 @@ function Swap(props) {
           id="token-out"
           value={token2Name}
           onChange={handleTokenOutChange}
-          data-tooltip-id="tooltip" data-tooltip-content="select share"
+          data-tooltip-id="tooltip" data-tooltip-content="Share Selection :"
 
         >
           <option value="">Select</option>
@@ -432,19 +439,19 @@ function Swap(props) {
         </button>
       </div>
 
-      
+
 
 
 
 
       <ToastContainer />
-      <Tooltip 
-         style={{ backgroundColor: "black", color: "white" , border: "1px solid black" }}
+      <Tooltip
+        style={{ backgroundColor: "black", color: "white", border: "1px solid black" }}
         id='tooltip'
       />
 
     </div>
-    
+
   );
 }
 

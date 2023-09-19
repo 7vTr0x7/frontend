@@ -25,6 +25,9 @@ const Buy = (props) => {
 
   const [tokenName, setTokenName] = useState('');
   const [tokens, setTokens] = useState({});
+  const [userShares, setUserShares] = useState([]);
+  const [quantity, setQuantity] = useState("");
+
 
 
 
@@ -34,7 +37,6 @@ const Buy = (props) => {
 
 
   const exchangeRate = useExchangeRate();
-  console.log(exchangeRate)
 
 
 
@@ -83,14 +85,32 @@ const Buy = (props) => {
         const ethValue = requiredEthValue;
 
 
+        const estimatedGas = await contract.estimateGas.buyShares(
+          amount, price, weiRate, tokens[tokenName], { value: ethValue }
+        );
+
+        console.log(`Estimated gas cost: ${estimatedGas}`);
+
+
         const transaction = await contract
           .connect(signer)
-          .buyShares(amount, price, weiRate, tokens[tokenName], { value: ethValue });
+          .buyShares(
+            amount,
+            price,
+            weiRate,
+            tokens[tokenName],
+            { value: ethValue, gasLimit: estimatedGas  }
+          );
+
+        toast.info(`waiting for tx to be complete`, {
+          position: toast.POSITION.TOP_CENTER
+        });
+
         await transaction.wait();
 
-  
+
         console.log(`${getTokenName(tokens[tokenName])} bought`);
-    
+
         toast.success(`${getTokenName(tokens[tokenName])} bought`, {
           position: toast.POSITION.TOP_CENTER
         });
@@ -100,12 +120,16 @@ const Buy = (props) => {
         toast.error("Error", {
           position: toast.POSITION.TOP_CENTER
         });
-  // Show the toast notification for the failure
+        // Show the toast notification for the failure
       }
     }
   };
 
-  
+
+
+
+
+
   const getTokenName = (address) => {
     // Replace this with your actual implementation to fetch the token name from your data source
     const tokenNames = {
@@ -152,8 +176,6 @@ const Buy = (props) => {
 
 
 
-
-
   const getTokenPrice = (name) => {
     // Replace this with your actual implementation to fetch the token name from your data source
     const tokenPrice = {
@@ -170,20 +192,34 @@ const Buy = (props) => {
     return price;
   };
   return (
-    <div className={styles.container}>
     
+    <div className={styles.container}>
+
 
 
       <div className={styles.buyShareSection}>
-        <h2 className={styles.heading}>Buy Share</h2>
+        <h2 className={styles.heading}>Buy Shares</h2>
         <form className={styles['buy-shares-form']} onSubmit={handleBuyShares}>
 
-          <div className= {styles.content}>
+          <div className={styles.content}>
 
           </div>
-         
+
+          <small className={styles.quantity}>
+            Share Quantity: {buyAmount !== '' || getSharePrice(tokenName) !== null ? (
+              getSharePrice(tokenName) === null ? (
+                "0.00"
+              ) : (
+                (buyAmount / getSharePrice(tokenName)).toFixed(5)
+              )
+            ) : (
+              "0.00"
+            )}
+          </small>
+
+
           <div className={styles.buyAmount} >
-          
+
             <input
               type="text"
               id="buyAmount"
@@ -192,8 +228,10 @@ const Buy = (props) => {
               onChange={(e) => setBuyAmount(e.target.value)}
               data-tooltip-id="tooltip" data-tooltip-content=" USD Amount : "
             />
+
           </div>
-         {/* <p className= {styles.i} >i</p> */}
+
+          {/* <p className= {styles.i} >i</p> */}
 
 
           <div className={styles.selector}>
@@ -213,35 +251,48 @@ const Buy = (props) => {
               ))}
             </select>
           </div>
+          {/* 
+          <div  className={styles.buyAmount}>
+
+          </div>
+          <div  className={styles.buyAmount}>
+
+          </div> */}
+
+          <div className={styles.price}>
+
+            <input
+              type="number"
+
+              placeholder="Share Price"
+              value={
+                getTokenPrice(tokenName) === '' ? '' : getTokenPrice(tokenName).toFixed(2)
+
+              }
+              data-tooltip-id="tooltip" data-tooltip-content={` Live  ${(tokenName == "" ? "Share" : tokenName)} Price :`}
+            />
+          </div>
 
 
-      
-          <input
-            type="number"
-            className={styles.sellAmount}
-            placeholder="Share Price"
-            value={
-              getTokenPrice(tokenName) === '' ? '' : getTokenPrice(tokenName).toFixed(2)
-              
-            }
-            data-tooltip-id="tooltip" data-tooltip-content={` Live  ${( tokenName == "" ?   "Share" : tokenName  )} Price :`}
-          />
+
+          <div className={styles.buyAmount}>
+            <input
+              type="number"
+
+              placeholder="required"
+              value={
+                buyAmount === ''
+                  ? ''
+                  : (buyAmount * exchangeRate).toFixed(3)
+              }
+              // data-tooltip-id="tooltip" data-tooltip-content={` required matic as per exchange rate 1 USD = ${exchangeRate} matic `}
+              data-tooltip-id="tooltip" data-tooltip-content={`  Required Matic :`}
+            />
+
+          </div>
 
 
 
-
-          <input
-            type="number"
-            className={styles.sellAmount}
-            placeholder="required"
-            value={
-              requiredEthValue === ''
-                ? ''
-                : ethers.utils.formatEther(requiredEthValue.toString())
-            }
-            // data-tooltip-id="tooltip" data-tooltip-content={` required matic as per exchange rate 1 USD = ${exchangeRate} matic `}
-            data-tooltip-id="tooltip" data-tooltip-content={` Matic Required :`}
-          />
 
           <button className={styles.buyButton} type="submit">
             Buy
@@ -253,8 +304,8 @@ const Buy = (props) => {
 
       </div>
       <ToastContainer />
-      <Tooltip 
-         style={{ backgroundColor: "black", color: "white" , border: "1px solid black" }}
+      <Tooltip
+        style={{ backgroundColor: "black", color: "white", border: "1px solid black" }}
         id='tooltip'
       />
 

@@ -48,7 +48,7 @@ import React, { useState, useEffect } from 'react';
             const provider = new ethers.providers.Web3Provider(window.ethereum);
             const signer = provider.getSigner();
   
-            const contractAddress = '0x5c256d407EAC0e82A717021d6782Ca4C7C0d5840';
+            const contractAddress = '0xc9a0ABeB48edAFcdb743c5B28d8E4996dbdC0207';
   
             // Create a new ethers.js contract instance
             const contract = new ethers.Contract(
@@ -58,12 +58,12 @@ import React, { useState, useEffect } from 'react';
             );
 
             const cpammContract = new ethers.Contract(
-              "0xdc3781a469464cE4efb87A1708C0292B9a49b936",
+              "0xC22b094a471D9DC2Ff2EbE050A56A1d6a25cf4CA",
               cpamm.abi,
               signer
             );
 
-            setCpammContractaddress('0xdc3781a469464cE4efb87A1708C0292B9a49b936')
+            setCpammContractaddress('0xC22b094a471D9DC2Ff2EbE050A56A1d6a25cf4CA')
 
             setCpammContract(cpammContract);
   

@@ -25,6 +25,8 @@ const Sell = (props) => {
   const [tokenAddress, setTokenAddress] = useState([]);
 
   const [sellAmount, setSellAmount] = useState('');
+  const [quantity, setQuantity] = useState("");
+
 
 
   const [tokenName, setTokenName] = useState('');
@@ -43,34 +45,49 @@ const Sell = (props) => {
 
 
 
-
-
   const handleSellShares = async (event) => {
     event.preventDefault();
 
     if (contract) {
       try {
-
-        const amount = ethers.utils.parseUnits((sellAmount * 100).toFixed(0), 0); // Convert to BigNumber with 0 decimal places
+        const amount = ethers.utils.parseUnits((sellAmount * 100).toFixed(0), 0);
         const p = getTokenPrice(tokenName);
-        const price = ethers.utils.parseUnits((Number(p) * 100).toFixed(0), 0); //
+        const price = ethers.utils.parseUnits((Number(p) * 100).toFixed(0), 0);
         const rate = exchangeRate;
-        const decimals = 18; // Adjust the number of decimals based on your requirements
+        const decimals = 18;
         const weiRate = ethers.utils.parseUnits(rate, decimals);
 
         console.log(amount.toString());
         console.log(price.toString());
         console.log(weiRate.toString());
 
-
-
-        const tx = await contract.sellShares(
-          amount.toString(),
-          price.toString(),
-          weiRate.toString(),
-          tokens[tokenName],
-          selectedFee
+        // Estimate the gas cost for the transaction
+        const estimatedGas = await contract.estimateGas.sellShares(
+          amount,
+          price,
+          weiRate,
+          selectedFee,
+          tokens[tokenName]
         );
+
+        console.log(`Estimated gas cost: ${estimatedGas}`);
+
+        const tx = await contract.connect(signer)
+        .sellShares(
+          amount,
+          price,
+          weiRate,
+          selectedFee,
+          tokens[tokenName],
+          {
+            gasLimit: estimatedGas // Set the gas limit to the estimated gas cost
+          }
+        );
+
+        toast.info(`Waiting for tx to be complete`, {
+          position: toast.POSITION.TOP_CENTER
+        });
+
         await tx.wait();
 
         console.log(`${getTokenName(tokens[tokenName])} sold`);
@@ -78,14 +95,11 @@ const Sell = (props) => {
         toast.success(`${getTokenName(tokens[tokenName])} sold`, {
           position: toast.POSITION.TOP_CENTER
         });
-
-        // notify(); // Show the toast notification for successful purchase
       } catch (error) {
         console.error('Failed to sell shares:', error);
         toast.error("Failed to sell shares", {
           position: toast.POSITION.TOP_CENTER
         });
-
       }
     }
   };
@@ -104,6 +118,30 @@ const Sell = (props) => {
 
     return tokenNames[address] || 'Unknown';
   };
+
+
+
+  // useEffect(() => {
+  //   const getQuantity = async () => {
+  //     if (sellAmount !== '' && tokenName !== "") {
+  //       try {
+  //         const amount = ethers.utils.parseUnits((sellAmount * 100).toFixed(0), 0); // Convert to BigNumber with 0 decimal places
+  //         const p = getTokenPrice(tokenName);
+  //         const price = ethers.utils.parseUnits((Number(p) * 100).toFixed(0), 0);
+  //         const qty = await contract.get(amount, price);
+  //         setQuantity(ethers.utils.formatEther(qty));
+  //       } catch (error) {
+  //         console.error('Failed to get user shares:', error);
+  //       }
+  //     } else {
+  //       // Handle the case where buyAmount is empty or not a valid number
+  //       setQuantity('');
+  //     }
+  //   };
+
+  //   getQuantity();
+  // }, [sellAmount, tokenName, contract]);
+
 
 
 
@@ -163,6 +201,24 @@ const Sell = (props) => {
       <div className={styles.buyShareSection}>
         <h2 className={styles.heading}>Sell Shares</h2>
         <form className="sell-shares-form" onSubmit={handleSellShares}>
+
+
+          <div className={styles.quantity}>
+
+            <small className={styles.quantity}>
+              Share Quantity: {sellAmount !== '' || getSharePrice(tokenName) !== null ? (
+                getSharePrice(tokenName) === null ? (
+                  "0.00"
+                ) : (
+                  (sellAmount / getSharePrice(tokenName)).toFixed(5)
+                )
+              ) : (
+                "0.00"
+              )}
+            </small>
+
+
+          </div>
           <div className={styles.sellAmount}>
             <input
               type="text"
@@ -174,6 +230,7 @@ const Sell = (props) => {
 
             />
           </div>
+
           <div className={styles.selector}>
 
             <select
@@ -181,7 +238,7 @@ const Sell = (props) => {
               value={tokenName}
               onChange={handleTokenChange}
               disabled={!Object.keys(tokens).length}
-              data-tooltip-id="tooltip" data-tooltip-content="select shares"
+              data-tooltip-id="tooltip" data-tooltip-content="Share Selection :"
 
             >
               <option value="">Select </option>
@@ -206,7 +263,7 @@ const Sell = (props) => {
                 getTokenPrice(tokenName) === '' ? '' : getTokenPrice(tokenName).toFixed(2)
 
               }
-              data-tooltip-id="tooltip" data-tooltip-content={` current ${(tokenName == "" ? "share" : tokenName)} price in USD`}
+              data-tooltip-id="tooltip" data-tooltip-content={` Live  ${(tokenName == "" ? "Share" : tokenName)} Price :`}
 
             />
 

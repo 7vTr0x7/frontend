@@ -18,6 +18,13 @@
   margin-bottom: 20px;
 }
 
+.quantity{
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: black;
+}
+
+
 .userSharesSection {
   width: 100%;
 }

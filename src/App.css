@@ -1,268 +1,192 @@
+/* Base styles */
 .App {
   text-align: center;
 }
 
 header {
-  height: 100px;
+  height: 14vh; /* 10% of viewport height */
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-left: 50px;
-  padding-right: 50px;
+  padding: 0 2%; /* Use percentages for padding */
 }
 
-.logo{
-  width: 50px;
-  height: 50px;
-  padding-right: 20px;
+.logo {
+  width: 8vw; /* 8% of viewport width */
+  height: auto; /* Maintain aspect ratio */
+  margin-right: 2vw; /* Adjust spacing for smaller screens */
 }
 
-.eth{
-  width: 20px;
-  height: 20px;
-  padding-right: 10px;
-
-}
-
-.leftH {
+.leftH, .rightH {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 1vw; /* Adjust gap for smaller screens */
 }
 
-.rightH {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 20px;
-}
-
-.headerItem {
-  padding: 10px;
-  padding-left: 15px;
-  padding-right: 15px;
-  border-radius: 5px;
-  font-weight: 500;
-  transition: 0.3s;
-  display: flex;
-  align-items: center;
-}
-
-.headerItem:hover {
-  background-color: rgb(34, 42, 58);
-  cursor: pointer;
-}
-
-.connectButton {
-  background-color: #243056; 
-  padding: 10px;
-  padding-right: 20px;
-  padding-left: 20px;
-  border-radius: 100px;
-  color: #5981F3;
-  font-weight: bold;
-  transition: 0.3s;
-}
-
-.connectButton:hover {
-  cursor: pointer;
-  color: #3b4874
-}
-
+/* Main window */
 .mainWindow {
-  margin-top: 40px;
+  margin-top: 2vh; /* Adjust margin for smaller screens */
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
+/* Link styles */
 .link {
   text-decoration: none;
   color: white;
-}
-
-.tradeBox {
-  width: 400px;
-  background-color: #0E111B;
-  border: 2px solid #21273a;
-  min-height: 300px;
-  border-radius: 15px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  padding-left: 30px;
-  padding-right: 30px;
-}
-
-
-.tradeBoxHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 98%;
-}
-
-.cog {
-  color: #51586f;
-  transition: 0.3s;
-}
-
-.cog:hover {
-  color: white;
-  rotate: 90deg;
-  cursor: pointer;
-}
-
-.switchButton {
-  background-color: #3a4157;
-  width: 25px;
-  height: 25px;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  border-radius: 8px;
-  position: absolute;
-  top: 86px;
-  left: 180px;
-  color: #5F6783;
-  border: 3px solid #0E111B;
-  font-size: 12px;
-  transition: 0.3s
-}
-
-.dollarAmount {
-  position: absolute;
-  top: 75px;
-  left: 14px;
-  font-size: 10px;
-  color: #5F6783;
-}
-
-.switchButton:hover {
-  color: white;
-  cursor: pointer;
-}
-
-.inputs {
-  position: relative;
-}
-
-.assetOne {
-  position: absolute;
-  min-width: 50px;
-  height: 30px;
-  background-color: #3a4157;
-  top: 36px;
-  right: 20px;
-  border-radius: 100px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 5px;
   font-weight: bold;
-  font-size: 17px;
-  padding-right: 8px;
 }
 
-.assetTwo {
-  position: absolute;
-  min-width: 50px;
-  height: 30px;
-  background-color: #3a4157;
-  top: 135px;
-  right: 20px;
-  border-radius: 100px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 5px;
-  font-weight: bold;
-  font-size: 17px;
-  padding-right: 8px;
+/* Media queries for responsive design */
+@media screen and (max-width: 668px) {
+  header {
+    padding: 0 2%; /* Adjust for larger screens */
+  }
+
+  .logo {
+    width: 6vw; /* Adjust logo size for larger screens */
+    margin-right: 1vw; /* Adjust spacing for larger screens */
+  }
+
+  .leftH, .rightH {
+    gap: 2vw; /* Adjust gap for larger screens */
+  }
+
+  .mainWindow {
+    margin-top: 3vh; /* Adjust margin for larger screens */
+  }
 }
 
-.assetOne:hover{
-  cursor: pointer;
+/* Media query for smaller screens */
+@media screen and (max-width: 375px) {
+  header {
+    padding: 0 2%; 
+   
+    width: auto;
+    margin-left: 5px;
+    /* Adjust for larger screens */
+  }
+
+  .logo {
+    width: 6vw; /* Adjust logo size for larger screens */
+    margin-right: 1vw; /* Adjust spacing for larger screens */
+  }
+
+  .leftH, .rightH {
+    gap: 2vw; /* Adjust gap for larger screens */
+  }
+
+  .mainWindow {
+    margin-top: 3vh; 
+    margin-left: 1px;/* Adjust margin for larger screens */
+    width: 100%; /* Adjust margin for larger screens */
+  }
 }
 
-.assetTwo:hover{
-  cursor: pointer;
+
+/* Media query for smaller screens */
+@media screen and (max-width: 370px) {
+  header {
+    padding: 0 2%; 
+    margin-left: 10px;
+
+    width: auto;
+    /* Adjust for larger screens */
+  }
+
+  .logo {
+    width: 3vw; /* Adjust logo size for larger screens */
+    margin-right: 1vw; /* Adjust spacing for larger screens */
+  }
+
+  .leftH, .rightH {
+    gap: 2vw; /* Adjust gap for larger screens */
+  }
+
+  .mainWindow {
+    margin-top: 3vh; /* Adjust margin for larger screens */
+
+    width: 100%; /* Adjust margin for larger screens */
+  }
 }
 
-.assetLogo {
-  height: 22px;
-  margin-left: 5px;
+
+
+/* Media query for smaller screens */
+@media screen and (max-width: 360px) {
+  header {
+    padding: 0 2%; 
+    margin-left: 30px;
+
+    width: auto;
+    /* Adjust for larger screens */
+  }
+
+  .logo {
+    width: 3vw; /* Adjust logo size for larger screens */
+    margin-right: 1vw; /* Adjust spacing for larger screens */
+  }
+
+  .leftH, .rightH {
+    gap: 2vw; /* Adjust gap for larger screens */
+  }
+
+  .mainWindow {
+    margin-top: 3vh; /* Adjust margin for larger screens */
+    margin-left: 7px;
+    width: 100%; /* Adjust margin for larger screens */
+  }
 }
 
-.swapButton {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #243056; 
-  width: calc(100%);
-  height: 55px;
-  font-size: 20px;
-  border-radius: 12px;
-  color: #5981F3;
-  font-weight: bold;
-  transition: 0.3s;
-  margin-bottom: 30px;
-  margin-top: 8px;
+/* Media query for smaller screens */
+@media screen and (max-width: 350px) {
+  header {
+    padding: 0 2%; 
+    margin-left: 2rem;
+
+    width: auto;
+    /* Adjust for larger screens */
+  }
+
+  .logo {
+    width: 3vw; /* Adjust logo size for larger screens */
+    margin-right: 1vw; /* Adjust spacing for larger screens */
+  }
+
+  .leftH, .rightH {
+    gap: 2vw; /* Adjust gap for larger screens */
+  }
+
+  .mainWindow {
+    margin-top: 3vh; /* Adjust margin for larger screens */
+    margin-left: 10px;
+    width: 100%; /* Adjust margin for larger screens */
+  }
 }
 
-.swapButton[disabled] {
-  background-color: #243056;
-  opacity: 0.4;
-  color: #5982f39b;
-}
-
-.swapButton[disabled]:hover {
-  cursor: not-allowed;
-  background-color: #243056;
-}
-
-.swapButton:hover {
-  cursor: pointer;
-  background-color: #3b4874
-}
-
-.tokenLogo {
-  height: 40px;
-  width: 40px;
-}
-
-.modalContent {
-  border-top: 1px solid #363e54;
-  /* padding-top: 20px; */
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px
-}
-
-.tokenChoice {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  padding-left: 20px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
-.tokenChoice:hover {
-  cursor: pointer;
-  background-color: #1f2639;
-}
-
-.tokenName {
-  margin-left: 10px;
-  font-size: 16px;
-  font-weight: 500;
-}
-
-.tokenTicker {
-  margin-left: 10px;
-  font-size: 13px;
-  font-weight: 300;
-  color: #51596f;
-}
+  /* Media query for smaller screens */
+  @media screen and (max-width: 340px) {
+    header {
+      padding: 0 2%; 
+      margin-left: 3rem;
+  
+      width: auto;
+      /* Adjust for larger screens */
+    }
+  
+    .logo {
+      width: 3vw; /* Adjust logo size for larger screens */
+      margin-right: 1vw; /* Adjust spacing for larger screens */
+    }
+  
+    .leftH, .rightH {
+      gap: 2vw; /* Adjust gap for larger screens */
+    }
+  
+    .mainWindow {
+      margin-top: 3vh; /* Adjust margin for larger screens */
+      margin-left: 18px;
+      width: 100%; /* Adjust margin for larger screens */
+    }
+  }
