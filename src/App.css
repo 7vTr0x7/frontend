@@ -1,6 +1,7 @@
 /* Base styles */
 .App {
   text-align: center;
+  background-color: white;
 }
 
 header {
